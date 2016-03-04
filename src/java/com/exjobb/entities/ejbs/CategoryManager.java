@@ -7,6 +7,7 @@ package com.exjobb.entities.ejbs;
 
 import com.exjobb.entities.models.Category;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,12 +15,12 @@ import javax.persistence.PersistenceContext;
  *
  * @author Filip
  */
+@Stateless
 public class CategoryManager {
     @PersistenceContext(name = "Exjobb_-_JavaPU") 
     EntityManager em;
     
     public List<Category> getAll() {
-        //comment
         return em.createNamedQuery("Category.findAll", Category.class).getResultList();
     }
     

@@ -5,10 +5,36 @@
  */
 package com.exjobb.entities.ejbs;
 
+import com.exjobb.entities.models.Category;
+import com.exjobb.entities.models.Item;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 /**
  *
  * @author Filip
  */
+@Stateless
 public class ItemManager {
+    @PersistenceContext(name = "Exjobb_-_JavaPU") 
+    EntityManager em;
     
+    public List<Item> getAll() {
+        return em.createNamedQuery("Item.findAll", Item.class).getResultList();
+    }
+    
+    public void add(Item item) {
+        em.merge(item);
+    }
+    
+    public Item getById(int id) {
+        return em.find(Item.class, id);
+    }
+    
+    public void remove(Item item) {
+        Item remove = item;
+        em.remove(remove);
+    }
 }
