@@ -33,12 +33,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Item.findByColor", query = "SELECT i FROM Item i WHERE i.color = :color"),
     @NamedQuery(name = "Item.findBySize", query = "SELECT i FROM Item i WHERE i.size = :size"),
     @NamedQuery(name = "Item.findByFeetsize", query = "SELECT i FROM Item i WHERE i.feetsize = :feetsize"),
-    @NamedQuery(name = "Item.findByImagepath", query = "SELECT i FROM Item i WHERE i.imagepath = :imagepath")})
+    @NamedQuery(name = "Item.findByImagepath", query = "SELECT i FROM Item i WHERE i.imagepath = :imagepath"),
+    @NamedQuery(name = "Item.findByName", query = "SELECT i FROM Item i WHERE i.name = :name"),
+    @NamedQuery(name = "Item.findByNumber", query = "SELECT i FROM Item i WHERE i.number = :number"),
+    @NamedQuery(name = "Item.findByDescription", query = "SELECT i FROM Item i WHERE i.description = :description")})
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -54,6 +57,14 @@ public class Item implements Serializable {
     @Size(max = 255)
     @Column(name = "imagepath")
     private String imagepath;
+    @Size(max = 45)
+    @Column(name = "name")
+    private String name;
+    @Column(name = "number")
+    private Integer number;
+    @Size(max = 255)
+    @Column(name = "description")
+    private String description;
     @JoinColumn(name = "Product_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Product productid;
@@ -103,6 +114,30 @@ public class Item implements Serializable {
 
     public void setImagepath(String imagepath) {
         this.imagepath = imagepath;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Product getProductid() {
