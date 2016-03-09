@@ -100,7 +100,7 @@ public class test implements ServletContextListener {
                 try {
                     watchKey = watchService.take();
                     if (watchKey != null) {
-                        for (WatchEvent<?> watchEvent : watchKey.pollEvents()) {
+                        for (WatchEvent<?> watchEvent : watchKey.pollEvents()) { // Is looking for events
                             System.out.println(watchEvent.kind() + " " + ((Path) watchEvent.context()));
 
                             ejb.category().add(new Category(1, "foo"));
