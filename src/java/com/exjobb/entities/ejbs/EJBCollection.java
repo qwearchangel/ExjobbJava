@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
  *
  * @author Filip
  */
-@Stateless
+@Stateless(mappedName = "EJBCo")
 @LocalBean
 public class EJBCollection {
     

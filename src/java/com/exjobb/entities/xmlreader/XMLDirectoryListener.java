@@ -16,8 +16,8 @@ import javax.ejb.Startup;
  *
  * @author Filip
  */
-@Startup
-@Singleton
+//@Startup
+//@Singleton
 public class XMLDirectoryListener {
 
      @EJB
@@ -31,5 +31,6 @@ public class XMLDirectoryListener {
 
     @PreDestroy
     public void shutdown() {
+        System.out.println("Shutting down...");
     }
 }
