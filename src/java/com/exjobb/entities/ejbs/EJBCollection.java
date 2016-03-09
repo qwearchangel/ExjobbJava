@@ -6,21 +6,30 @@
 package com.exjobb.entities.ejbs;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
+import javax.transaction.Transactional;
 
 /**
  *
  * @author Filip
  */
 @Stateless
+@LocalBean
 public class EJBCollection {
     
     @EJB
-    CategoryManager cm;
+    private CategoryManager cm;
     @EJB
-    ProductManager pm;
+    private ProductManager pm;
     @EJB
-    ItemManager im;
+    private ItemManager im;
+    @EJB
+    private FileSystemMonitor fsm;
+
+    public EJBCollection() {
+    }
     
     public CategoryManager category() {
         return cm;
@@ -32,5 +41,9 @@ public class EJBCollection {
     
     public ItemManager item() {
         return im;
+    }
+    
+    public FileSystemMonitor fileSystemMonitor() {
+        return fsm;
     }
 }

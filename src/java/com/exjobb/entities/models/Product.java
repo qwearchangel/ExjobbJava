@@ -60,7 +60,7 @@ public class Product implements Serializable {
     private Collection<Item> itemCollection;
     @JoinColumn(name = "Category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Category categoryid;
+    private Category category;
 
     public Product() {
     }
@@ -115,12 +115,12 @@ public class Product implements Serializable {
         this.itemCollection = itemCollection;
     }
 
-    public Category getCategoryid() {
-        return categoryid;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryid(Category categoryid) {
-        this.categoryid = categoryid;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -145,7 +145,6 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.exjobb.entities.models.Product[ id=" + id + " ]";
+        return "Product{" + "id=" + id + ", name=" + name + ", number=" + number + ", description=" + description + ", itemCollection=" + itemCollection + ", category=" + category + '}';
     }
-    
 }
