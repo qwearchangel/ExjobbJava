@@ -23,6 +23,9 @@ public class XMLItemReader {
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
+            if (list.getLength() == 0) {
+                return 0;
+            }
             result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
             e.printStackTrace();
@@ -35,6 +38,9 @@ public class XMLItemReader {
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
+            if (list.getLength() == 0) {
+                return result;
+            }
             result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
             e.printStackTrace();
@@ -47,6 +53,9 @@ public class XMLItemReader {
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
+            if (list.getLength() == 0) {
+                return result;
+            }
             result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
             e.printStackTrace();
@@ -59,6 +68,9 @@ public class XMLItemReader {
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
+            if (list.getLength() == 0) {
+                return result;
+            }
             result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
         }
@@ -70,6 +82,9 @@ public class XMLItemReader {
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
+            if (list.getLength() == 0) {
+                return result;
+            }
             result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
         }
@@ -80,6 +95,9 @@ public class XMLItemReader {
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
+            if (list.getLength() == 0) {
+                return result;
+            }
             result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
         }

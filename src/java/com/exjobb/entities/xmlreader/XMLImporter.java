@@ -93,7 +93,7 @@ public class XMLImporter {
             ejb.product().remove(ejb.product().getProductByNumber(productNumber));
             return;
         }
-        
+
         if (operation.equals(Operation.Link)) {
             Product product = new Product();
             product.setName(XMLProductReader.getProductName(xPath, xml));
@@ -101,7 +101,7 @@ public class XMLImporter {
             product.setName(XMLProductReader.getProductName(xPath, xml));
             product.setDescription(XMLProductReader.getProductDescription(xPath, xml));
             product.setNumber(productNumber);
-            
+
             String categoryName = XMLProductReader.getProductCategory(xPath, xml);
             Category category = ejb.category().getByName(categoryName);
             if (category == null) {
@@ -112,21 +112,31 @@ public class XMLImporter {
             ejb.product().add(product);
             return;
         }
-        
+
         if (operation.equals(Operation.Update)) {
             Product update = ejb.product().getProductByNumber(productNumber);
-            update.setName(XMLProductReader.getProductName(xPath, xml));
-            update.setDescription(XMLProductReader.getProductDescription(xPath, xml));
-            update.setName(XMLProductReader.getProductName(xPath, xml));
-            update.setDescription(XMLProductReader.getProductDescription(xPath, xml));
-            
-            String categoryName = XMLProductReader.getProductCategory(xPath, xml);
-            Category category = ejb.category().getByName(categoryName);
-            if (category == null) {
-                ejb.category().add(new Category(categoryName));
-                category = ejb.category().getByName(categoryName);
+
+            String name = XMLProductReader.getProductName(xPath, xml);
+            String description = XMLProductReader.getProductDescription(xPath, xml);
+
+            if (!name.isEmpty()) {
+                update.setName(name);
             }
-            update.setCategory(category);
+            if (!description.isEmpty()) {
+                update.setDescription(description);
+            }
+
+            String categoryName = XMLProductReader.getProductCategory(xPath, xml);
+            Category category;
+            if (!categoryName.isEmpty()) {
+
+                category = ejb.category().getByName(categoryName);
+                if (category == null) {
+                    ejb.category().add(new Category(categoryName));
+                    category = ejb.category().getByName(categoryName);
+                }
+                update.setCategory(category);
+            }
             ejb.product().add(update);
         }
     }
@@ -139,16 +149,17 @@ public class XMLImporter {
             ejb.item().remove(ejb.item().getByNumber(itemNumber));
             return;
         }
-        
+
         if (operation.equals(Operation.Link)) {
             Item item = new Item();
+            
             item.setName(XMLItemReader.getItemName(xPath, xml));
             item.setNumber(itemNumber);
             item.setColor(XMLItemReader.getItemColor(xPath, xml));
             item.setSize(XMLItemReader.getItemSize(xPath, xml));
             item.setFeetsize(XMLItemReader.getItemFeetSize(xPath, xml));
             item.setDescription(XMLItemReader.getItemDescription(xPath, xml));
-            
+
             Product product = ejb.product().getProductByNumber(removeLastTwo(itemNumber));
             if (product == null) {
                 Logger.getLogger(XMLImporter.class.getName()).log(Level.SEVERE, null, "There is no product for this item!");
@@ -157,30 +168,47 @@ public class XMLImporter {
             ejb.item().add(item);
             return;
         }
-        
+
         if (operation.equals(Operation.Update)) {
             Item update = ejb.item().getByNumber(itemNumber);
-            update.setName(XMLItemReader.getItemName(xPath, xml));
-            update.setNumber(itemNumber);
-            update.setColor(XMLItemReader.getItemColor(xPath, xml));
-            update.setSize(XMLItemReader.getItemSize(xPath, xml));
-            update.setFeetsize(XMLItemReader.getItemFeetSize(xPath, xml));
-            update.setDescription(XMLItemReader.getItemDescription(xPath, xml));
+            
+            String name = XMLItemReader.getItemName(xPath, xml);
+            String color = XMLItemReader.getItemColor(xPath, xml);
+            String size = XMLItemReader.getItemSize(xPath, xml);
+            String feetSize = XMLItemReader.getItemFeetSize(xPath, xml);
+            String description = XMLItemReader.getItemDescription(xPath, xml);
+            
+            if (!name.isEmpty()) {
+               update.setName(name); 
+            }
+            if (!color.isEmpty()) {
+                update.setColor(color);
+            }
+            if (!size.isEmpty()) {
+                update.setSize(size);
+            }
+            if (!feetSize.isEmpty()) {
+                update.setFeetsize(feetSize);
+            }
+            if (!description.isEmpty()) {
+                update.setDescription(description);
+            }
             
             Product product = ejb.product().getProductByNumber(removeLastTwo(itemNumber));
             if (product == null) {
                 Logger.getLogger(XMLImporter.class.getName()).log(Level.SEVERE, null, "There is no product for this item!");
+            } else {
+                update.setProductid(product);
             }
-            update.setProductid(product);
-            
+
             ejb.item().add(update);
         }
     }
-    
+
     private int removeLastTwo(int number) {
         String str = Integer.toString(number);
         if (str != null && str.length() > 0) {
-            str = str.substring(0, str.length()-2);
+            str = str.substring(0, str.length() - 2);
         }
         return Integer.parseInt(str);
     }

@@ -5,9 +5,10 @@
  */
 package com.exjobb.entities.xmlreader;
 
-import com.exjobb.entities.xmlreader.XMLImporter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,9 +17,8 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
-import java.nio.file.spi.FileTypeDetector;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +30,6 @@ public class DirectoryMonitor implements Runnable {
 
     private final XMLImporter xi;
     private volatile Thread thread;
-    private final String fileSystemPath = "C:\\temp\\";
 
     public DirectoryMonitor() {
         this.xi = new XMLImporter();
@@ -54,6 +53,15 @@ public class DirectoryMonitor implements Runnable {
 
     @Override
     public void run() {
+        
+        Properties prop = new Properties();
+        try {
+            prop.load(DirectoryMonitor.class.getResourceAsStream("/config.properties"));
+        } catch (IOException ex) {
+            Logger.getLogger(DirectoryMonitor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String fileSystemPath = prop.getProperty("systempath");
 
         checkExsistingFiles(fileSystemPath);
 
@@ -109,7 +117,7 @@ public class DirectoryMonitor implements Runnable {
             for (String file : fileList) {
                 // Process each file.
                 System.out.println("FileList: " + path + file);
-                File xml = new File(path+file);
+                File xml = new File(path + file);
                 if (getExtension(xml.getAbsolutePath()).equals("xml")) {
                     System.out.println("Existing file is xml");
                     xi.xmlAction(xml.getAbsolutePath());
