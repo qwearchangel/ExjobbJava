@@ -6,6 +6,7 @@
 package com.exjobb.entities.ejbs;
 
 import com.exjobb.entities.models.Product;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
@@ -19,8 +20,7 @@ import javax.transaction.Transactional;
  * @author Filip
  */
 @Stateless
-@LocalBean
-public class ProductManager {
+public class ProductManager implements Serializable {
     @PersistenceContext(name = "ExjobbJavaPU") 
     private EntityManager em;
 
@@ -32,7 +32,13 @@ public class ProductManager {
     }
     
     public Product getProductByNumber(int number) {
-        return em.createNamedQuery("Product.findByNumber", Product.class).setParameter("number", number).getSingleResult();
+        List<Product> list = em.createNamedQuery("Product.findByNumber", Product.class).setParameter("number", number).getResultList();
+        if (list.isEmpty()) {
+            return null;
+        }
+        else {
+            return list.get(0);
+        }
     }
     
     public Product getProductById(int id) {
@@ -46,8 +52,7 @@ public class ProductManager {
     }
     
     public void remove(Product product) {
-        Product remove = product;
-        em.remove(remove);
+        em.remove(getProductById(product.getId()));
         em.flush();
     }
 }

@@ -5,32 +5,37 @@
  */
 package com.exjobb.entities.xmlreader;
 
-import com.exjobb.entities.ejbs.FileSystemMonitor;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 /**
  *
  * @author Filip
  */
-//@Startup
-//@Singleton
-public class XMLDirectoryListener {
+@WebListener
+public class XMLDirectoryListener implements ServletContextListener {
 
-     @EJB
-     private FileSystemMonitor fsm;
+    private final DirectoryMonitor dm;
 
-    @PostConstruct
-    public void startup() {
-        String path = "C:\\temp\\";
-        fsm.poll(path);
+    public XMLDirectoryListener() {
+        this.dm = new DirectoryMonitor();
     }
 
-    @PreDestroy
-    public void shutdown() {
-        System.out.println("Shutting down...");
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        System.out.println("Initializeing directory listener ...");
+        dm.startThread();
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        System.out.println("Shutting down ...");
+        dm.stopThread();
     }
 }

@@ -5,6 +5,8 @@
  */
 package com.exjobb.entities.ejbs;
 
+import com.exjobb.entities.xmlreader.DirectoryMonitor;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
@@ -15,9 +17,8 @@ import javax.transaction.Transactional;
  *
  * @author Filip
  */
-@Stateless()
-@LocalBean
-public class EJBCollection {
+@Stateless
+public class EJBCollection implements Serializable{
     
     @EJB
     private CategoryManager cm;
@@ -25,12 +26,7 @@ public class EJBCollection {
     private ProductManager pm;
     @EJB
     private ItemManager im;
-    @EJB
-    private FileSystemMonitor fsm;
 
-    public EJBCollection() {
-    }
-    
     public CategoryManager category() {
         return cm;
     }
@@ -41,9 +37,5 @@ public class EJBCollection {
     
     public ItemManager item() {
         return im;
-    }
-    
-    public FileSystemMonitor fileSystemMonitor() {
-        return fsm;
     }
 }

@@ -6,6 +6,7 @@
 package com.exjobb.entities.ejbs;
 
 import com.exjobb.entities.models.Category;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
@@ -19,8 +20,7 @@ import javax.transaction.Transactional;
  * @author Filip
  */
 @Stateless
-@LocalBean
-public class CategoryManager {
+public class CategoryManager implements Serializable {
     @PersistenceContext(name = "ExjobbJavaPU") 
     private EntityManager em;
 
@@ -49,12 +49,10 @@ public class CategoryManager {
     public void add(Category category) {
         em.merge(category);
         em.flush();
-        System.out.println("added new category");
     }
     
     public void remove(Category category) {
-        Category remove = category;
-        em.remove(remove);
+        em.remove(getById(category.getId()));
         em.flush();
     }
 }

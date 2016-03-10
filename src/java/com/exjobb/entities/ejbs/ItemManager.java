@@ -6,6 +6,7 @@
 package com.exjobb.entities.ejbs;
 
 import com.exjobb.entities.models.Item;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
@@ -19,31 +20,34 @@ import javax.transaction.Transactional;
  * @author Filip
  */
 @Stateless
-@LocalBean
-public class ItemManager {
-    @PersistenceContext(name = "ExjobbJavaPU") 
+public class ItemManager implements Serializable {
+
+    @PersistenceContext(name = "ExjobbJavaPU")
     private EntityManager em;
 
     public ItemManager() {
     }
-    
+
     public List<Item> getAll() {
         return em.createNamedQuery("Item.findAll", Item.class).getResultList();
     }
-    
+
     @Transactional
     public void add(Item item) {
         em.merge(item);
         em.flush();
     }
-    
+
     public Item getById(int id) {
         return em.find(Item.class, id);
     }
-    
+
+    public Item getByNumber(int number) {
+        return em.createNamedQuery("Item.findByNumber", Item.class).setParameter("number", number).getSingleResult();
+    }
+
     public void remove(Item item) {
-        Item remove = item;
-        em.remove(remove);
+        em.remove(getById(item.getId()));
         em.flush();
     }
 }

@@ -38,7 +38,7 @@ public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -61,6 +61,11 @@ public class Category implements Serializable {
         this.id = id;
         this.name = name;
     }
+
+    public Category(String name) {
+        this.name = name;
+    }
+    
 
     public Integer getId() {
         return id;

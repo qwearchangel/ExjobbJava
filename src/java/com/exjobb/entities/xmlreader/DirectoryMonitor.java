@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.exjobb.entities.ejbs;
+package com.exjobb.entities.xmlreader;
 
 import com.exjobb.entities.xmlreader.XMLImporter;
 import java.io.File;
@@ -21,29 +21,50 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.Asynchronous;
-import javax.ejb.Stateless;
 
 /**
  *
  * @author Filip
  */
-@Stateless
-public class FileSystemMonitor {
+public class DirectoryMonitor implements Runnable {
 
-    @Asynchronous
-    public void poll(String fileSystemPath) {
+    private final XMLImporter xi;
+    private volatile Thread thread;
+    private final String fileSystemPath = "C:\\temp\\";
+
+    public DirectoryMonitor() {
+        this.xi = new XMLImporter();
+    }
+
+    public void startThread() {
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    /**
+     * Flag worker thread to stop gracefully.
+     */
+    public void stopThread() {
+        if (thread != null) {
+            Thread runningThread = thread;
+            thread = null;
+            runningThread.interrupt();
+        }
+    }
+
+    @Override
+    public void run() {
 
         checkExsistingFiles(fileSystemPath);
 
         try {
             WatchService watcher = FileSystems.getDefault().newWatchService();
-
+            Thread runningThread = Thread.currentThread();
             Path path = Paths.get(fileSystemPath);
             WatchKey watchKey = path.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
 
             System.out.println("Watch service is watching: " + path.toString());
-            for (;;) {
+            while (runningThread == thread) {
                 WatchKey key = null;
                 try {
                     key = watcher.take();
@@ -59,7 +80,8 @@ public class FileSystemMonitor {
                         Path fullPath = dir.resolve(event.context().toString());
                         System.out.println("WATCHINNG: " + fullPath);
                         if (getExtension(fullPath.toString()).equals("xml")) {
-                            System.out.println("watcher: file is xml");
+                            xi.xmlAction(fullPath.toString());
+                            Files.delete(fullPath);
                         }
                     }
                 } catch (InterruptedException e) {
@@ -75,7 +97,7 @@ public class FileSystemMonitor {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(FileSystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DirectoryMonitor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -87,9 +109,11 @@ public class FileSystemMonitor {
             for (String file : fileList) {
                 // Process each file.
                 System.out.println("FileList: " + path + file);
-                if (getExtension(path + file).equals("xml")) {
+                File xml = new File(path+file);
+                if (getExtension(xml.getAbsolutePath()).equals("xml")) {
                     System.out.println("Existing file is xml");
-                    XMLImporter.Import(path + file);
+                    xi.xmlAction(xml.getAbsolutePath());
+                    xml.delete();
                 }
             }
         }
