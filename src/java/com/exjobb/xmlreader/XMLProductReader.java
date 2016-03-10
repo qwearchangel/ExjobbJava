@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.exjobb.entities.xmlreader;
+package com.exjobb.xmlreader;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -18,12 +18,15 @@ import org.w3c.dom.NodeList;
  */
 public class XMLProductReader {
 
-    public static int getProductId(XPath xPath, Document xml) {
+    public static int getProductNumber(XPath xPath, Document xml) {
         String expression = "Data/Fields/ProductId";
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
-            result = list.item(0).getFirstChild().getNodeValue();
+            if (list.getLength() == 0) {
+                return 0;
+            }
+            result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
             e.printStackTrace();
         }
@@ -35,21 +38,41 @@ public class XMLProductReader {
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
-            result = list.item(0).getFirstChild().getNodeValue();
+            if (list.getLength() == 0) {
+                return result;
+            }
+            result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
             e.printStackTrace();
         }
         return result;
     }
     
-    public static String getCategory(XPath xPath, Document xml) {
-        String expression = "Data/Fields/ProductId";
+    public static String getProductCategory(XPath xPath, Document xml) {
+        String expression = "Data/Fields/ProductCategory";
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
-            result = list.item(0).getFirstChild().getNodeValue();
+            if (list.getLength() == 0) {
+                return result;
+            }
+            result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
             e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public static String getProductDescription(XPath xPath, Document xml) {
+        String expression = "Data/Fields/ProductDescription";
+        String result = "";
+        try {
+            NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
+            if (list.getLength() == 0) {
+                return result;
+            }
+            result = list.item(0).getTextContent();
+        } catch (XPathExpressionException | DOMException e) {
         }
         return result;
     }

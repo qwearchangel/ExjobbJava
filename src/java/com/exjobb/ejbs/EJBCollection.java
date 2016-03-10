@@ -3,25 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.exjobb.entities.ejbs;
+package com.exjobb.ejbs;
 
+import com.exjobb.xmlreader.DirectoryMonitor;
+import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
+import javax.transaction.Transactional;
 
 /**
  *
  * @author Filip
  */
 @Stateless
-public class EJBCollection {
+public class EJBCollection implements Serializable{
     
     @EJB
-    CategoryManager cm;
+    private CategoryManager cm;
     @EJB
-    ProductManager pm;
+    private ProductManager pm;
     @EJB
-    ItemManager im;
-    
+    private ItemManager im;
+
     public CategoryManager category() {
         return cm;
     }

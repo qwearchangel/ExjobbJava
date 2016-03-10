@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.exjobb.entities.models;
+package com.exjobb.models;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -38,7 +38,7 @@ public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -47,7 +47,7 @@ public class Category implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private Collection<Product> productCollection;
 
     public Category() {
@@ -61,6 +61,11 @@ public class Category implements Serializable {
         this.id = id;
         this.name = name;
     }
+
+    public Category(String name) {
+        this.name = name;
+    }
+    
 
     public Integer getId() {
         return id;
