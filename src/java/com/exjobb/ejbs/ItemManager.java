@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.exjobb.entities.ejbs;
+package com.exjobb.ejbs;
 
-import com.exjobb.entities.models.Item;
+import com.exjobb.models.Item;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.LocalBean;

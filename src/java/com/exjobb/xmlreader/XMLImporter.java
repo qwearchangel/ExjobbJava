@@ -1,10 +1,10 @@
-package com.exjobb.entities.xmlreader;
+package com.exjobb.xmlreader;
 
-import com.exjobb.entities.constants.Operation;
-import com.exjobb.entities.ejbs.EJBCollection;
-import com.exjobb.entities.models.Category;
-import com.exjobb.entities.models.Item;
-import com.exjobb.entities.models.Product;
+import com.exjobb.constants.Operation;
+import com.exjobb.ejbs.EJBCollection;
+import com.exjobb.models.Category;
+import com.exjobb.models.Item;
+import com.exjobb.models.Product;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.exjobb.entities.ejbs;
+package com.exjobb.ejbs;
 
-import com.exjobb.entities.xmlreader.DirectoryMonitor;
+import com.exjobb.xmlreader.DirectoryMonitor;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;

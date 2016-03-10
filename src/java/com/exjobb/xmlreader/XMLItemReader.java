@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.exjobb.entities.xmlreader;
+package com.exjobb.xmlreader;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -16,10 +16,10 @@ import org.w3c.dom.NodeList;
  *
  * @author Filip
  */
-public class XMLProductReader {
-
-    public static int getProductNumber(XPath xPath, Document xml) {
-        String expression = "Data/Fields/ProductId";
+public class XMLItemReader {
+    
+    public static int getItemNumber(XPath xPath, Document xml) {
+        String expression = "Data/Fields/ItemId";
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
@@ -33,8 +33,8 @@ public class XMLProductReader {
         return Integer.parseInt(result);
     }
     
-    public static String getProductName(XPath xPath, Document xml) {
-        String expression = "Data/Fields/ProductName";
+    public static String getItemName(XPath xPath, Document xml) {
+        String expression = "Data/Fields/ItemName";
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
@@ -48,8 +48,8 @@ public class XMLProductReader {
         return result;
     }
     
-    public static String getProductCategory(XPath xPath, Document xml) {
-        String expression = "Data/Fields/ProductCategory";
+    public static String getItemColor(XPath xPath, Document xml) {
+        String expression = "Data/Fields/ItemColor";
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
@@ -63,8 +63,8 @@ public class XMLProductReader {
         return result;
     }
     
-    public static String getProductDescription(XPath xPath, Document xml) {
-        String expression = "Data/Fields/ProductDescription";
+    public static String getItemDescription(XPath xPath, Document xml) {
+        String expression = "Data/Fields/ItemDescritpion";
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
@@ -76,4 +76,32 @@ public class XMLProductReader {
         }
         return result;
     }
+    
+    public static String getItemSize(XPath xPath, Document xml) {
+        String expression = "Data/Fields/ItemSize";
+        String result = "";
+        try {
+            NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
+            if (list.getLength() == 0) {
+                return result;
+            }
+            result = list.item(0).getTextContent();
+        } catch (XPathExpressionException | DOMException e) {
+        }
+        return result;
+    }
+    public static String getItemFeetSize(XPath xPath, Document xml) {
+        String expression = "Data/Fields/ItemFeetSize";
+        String result = "";
+        try {
+            NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
+            if (list.getLength() == 0) {
+                return result;
+            }
+            result = list.item(0).getTextContent();
+        } catch (XPathExpressionException | DOMException e) {
+        }
+        return result;
+    }
+    
 }

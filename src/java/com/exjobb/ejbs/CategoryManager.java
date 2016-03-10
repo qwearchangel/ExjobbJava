@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.exjobb.entities.ejbs;
+package com.exjobb.ejbs;
 
-import com.exjobb.entities.models.Product;
+import com.exjobb.models.Category;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.LocalBean;
@@ -20,19 +20,19 @@ import javax.transaction.Transactional;
  * @author Filip
  */
 @Stateless
-public class ProductManager implements Serializable {
+public class CategoryManager implements Serializable {
     @PersistenceContext(name = "ExjobbJavaPU") 
     private EntityManager em;
 
-    public ProductManager() {
+    public CategoryManager() {
     }
     
-    public List<Product> getAllProducts() {
-        return em.createNamedQuery("Product.findAll", Product.class).getResultList();
+    public List<Category> getAll() {
+        return em.createNamedQuery("Category.findAll", Category.class).getResultList();
     }
     
-    public Product getProductByNumber(int number) {
-        List<Product> list = em.createNamedQuery("Product.findByNumber", Product.class).setParameter("number", number).getResultList();
+    public Category getByName(String name) {
+        List<Category> list = em.createNamedQuery("Category.findByName", Category.class).setParameter("name", name).getResultList();
         if (list.isEmpty()) {
             return null;
         }
@@ -41,18 +41,20 @@ public class ProductManager implements Serializable {
         }
     }
     
-    public Product getProductById(int id) {
-        return em.find(Product.class, id);
+    public Category getById(int id) {
+        return em.find(Category.class, id);
     }
     
-    @Transactional
-    public void add(Product product) {
-        em.merge(product);
+    @Transactional()
+    public void add(Category category) {
+        em.merge(category);
         em.flush();
     }
     
-    public void remove(Product product) {
-        em.remove(getProductById(product.getId()));
+    public void remove(Category category) {
+        em.remove(getById(category.getId()));
         em.flush();
     }
 }
+
+

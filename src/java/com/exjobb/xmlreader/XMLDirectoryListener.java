@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.exjobb.entities.xmlreader;
+package com.exjobb.xmlreader;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.exjobb.entities.ejbs;
+package com.exjobb.ejbs;
 
-import com.exjobb.entities.models.Category;
+import com.exjobb.models.Product;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.LocalBean;
@@ -20,19 +20,19 @@ import javax.transaction.Transactional;
  * @author Filip
  */
 @Stateless
-public class CategoryManager implements Serializable {
+public class ProductManager implements Serializable {
     @PersistenceContext(name = "ExjobbJavaPU") 
     private EntityManager em;
 
-    public CategoryManager() {
+    public ProductManager() {
     }
     
-    public List<Category> getAll() {
-        return em.createNamedQuery("Category.findAll", Category.class).getResultList();
+    public List<Product> getAllProducts() {
+        return em.createNamedQuery("Product.findAll", Product.class).getResultList();
     }
     
-    public Category getByName(String name) {
-        List<Category> list = em.createNamedQuery("Category.findByName", Category.class).setParameter("name", name).getResultList();
+    public Product getProductByNumber(int number) {
+        List<Product> list = em.createNamedQuery("Product.findByNumber", Product.class).setParameter("number", number).getResultList();
         if (list.isEmpty()) {
             return null;
         }
@@ -41,20 +41,18 @@ public class CategoryManager implements Serializable {
         }
     }
     
-    public Category getById(int id) {
-        return em.find(Category.class, id);
+    public Product getProductById(int id) {
+        return em.find(Product.class, id);
     }
     
-    @Transactional()
-    public void add(Category category) {
-        em.merge(category);
+    @Transactional
+    public void add(Product product) {
+        em.merge(product);
         em.flush();
     }
     
-    public void remove(Category category) {
-        em.remove(getById(category.getId()));
+    public void remove(Product product) {
+        em.remove(getProductById(product.getId()));
         em.flush();
     }
 }
-
-
