@@ -7,6 +7,7 @@ package com.exjobb.models;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -57,7 +58,7 @@ public class Product implements Serializable {
     @Column(name = "description")
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")
-    private Collection<Item> itemCollection;
+    private List<Item> itemCollection;
     @JoinColumn(name = "Category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category category;
@@ -107,11 +108,11 @@ public class Product implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Item> getItemCollection() {
+    public List<Item> getItemCollection() {
         return itemCollection;
     }
 
-    public void setItemCollection(Collection<Item> itemCollection) {
+    public void setItemCollection(List<Item> itemCollection) {
         this.itemCollection = itemCollection;
     }
 

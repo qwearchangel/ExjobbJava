@@ -3,19 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/models/Item.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/ejbs/ProductManager.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/models/Item.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/xmlreader/XMLImporter.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/xmlreader/DirectoryMonitor.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/web/WEB-INF/glassfish-web.xml</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/web/index.xhtml</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/ejbs/EJBCollection.java</file>
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/xmlreader/XMLDirectoryListener.java</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/ejbs/EJBCollection.java</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/ejbs/ItemManager.java</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/ejbs/ProductManager.java</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/xmlreader/DirectoryMonitor.java</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/xmlreader/test.java</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/ejbs/CategoryManager.java</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/models/Category.java</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/xmlreader/XMLImporter.java</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/conf/persistence.xml</file>
-            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/entities/constants/Operation.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/ejbs/ItemManager.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/models/Product.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/xmlreader/XMLProductReader.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/beans/CategoryBean.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/web/WEB-INF/classes/config.properties</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/ejbs/CategoryManager.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/xmlreader/XMLItemReader.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/beans/ProductBean.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/models/Category.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/beans/ItemBean.java</file>
         </group>
     </open-files>
 </project-private>

@@ -6,8 +6,11 @@
 package com.exjobb.ejbs;
 
 import com.exjobb.models.Item;
+import com.exjobb.models.Product;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Stateless;
@@ -24,6 +27,9 @@ public class ItemManager implements Serializable {
 
     @PersistenceContext(name = "ExjobbJavaPU")
     private EntityManager em;
+    
+    @EJB
+    ProductManager pm;
 
     public ItemManager() {
     }
@@ -49,5 +55,16 @@ public class ItemManager implements Serializable {
     public void remove(Item item) {
         em.remove(getById(item.getId()));
         em.flush();
+    }
+    
+    public List<Item> getAllItemsUnderProduct(String brandNumber) {
+        if (brandNumber.isEmpty()) {
+            return null;
+        }
+        Product product = pm.getProductByNumber(Integer.parseInt(brandNumber));
+        if (product == null) {
+            return null;
+        }
+        return (product.getItemCollection());
     }
 }

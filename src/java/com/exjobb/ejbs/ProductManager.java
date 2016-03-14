@@ -5,9 +5,12 @@
  */
 package com.exjobb.ejbs;
 
+import com.exjobb.models.Category;
 import com.exjobb.models.Product;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Stateless;
@@ -23,6 +26,9 @@ import javax.transaction.Transactional;
 public class ProductManager implements Serializable {
     @PersistenceContext(name = "ExjobbJavaPU") 
     private EntityManager em;
+    
+    @EJB
+    CategoryManager cm;
 
     public ProductManager() {
     }
@@ -54,5 +60,13 @@ public class ProductManager implements Serializable {
     public void remove(Product product) {
         em.remove(getProductById(product.getId()));
         em.flush();
+    }
+    
+    public List<Product> getAllProductUnderCategory(String categortName) {
+        Category category = cm.getByName(categortName);
+        if (category == null) {
+            return null;
+        }
+        return category.getProductCollection();
     }
 }
