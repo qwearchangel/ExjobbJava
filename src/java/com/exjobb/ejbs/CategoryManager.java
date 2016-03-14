@@ -49,11 +49,16 @@ public class CategoryManager implements Serializable {
     public void add(Category category) {
         em.merge(category);
         em.flush();
+        em.clear();
+        
     }
     
+    @Transactional()
     public void remove(Category category) {
         em.remove(getById(category.getId()));
         em.flush();
+        em.clear();
+        
     }
 }
 

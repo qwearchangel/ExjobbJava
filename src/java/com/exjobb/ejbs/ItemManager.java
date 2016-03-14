@@ -42,6 +42,8 @@ public class ItemManager implements Serializable {
     public void add(Item item) {
         em.merge(item);
         em.flush();
+        em.clear();
+        
     }
 
     public Item getById(int id) {
@@ -52,9 +54,12 @@ public class ItemManager implements Serializable {
         return em.createNamedQuery("Item.findByNumber", Item.class).setParameter("number", number).getSingleResult();
     }
 
+    @Transactional()
     public void remove(Item item) {
         em.remove(getById(item.getId()));
         em.flush();
+        em.clear();
+        
     }
     
     public List<Item> getAllItemsUnderProduct(String brandNumber) {

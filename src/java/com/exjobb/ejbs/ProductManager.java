@@ -55,11 +55,16 @@ public class ProductManager implements Serializable {
     public void add(Product product) {
         em.merge(product);
         em.flush();
+        em.clear();
+        
     }
     
+    @Transactional()
     public void remove(Product product) {
         em.remove(getProductById(product.getId()));
         em.flush();
+        em.clear();
+        
     }
     
     public List<Product> getAllProductUnderCategory(String categortName) {
