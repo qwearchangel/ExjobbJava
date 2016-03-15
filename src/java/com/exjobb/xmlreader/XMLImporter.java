@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.xml.parsers.DocumentBuilder;
@@ -40,11 +39,11 @@ public class XMLImporter {
         }
     }
 
-    public void xmlAction(String filePath) {
+    public void xmlAction(String importPath) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document xml = builder.parse(new File(filePath));
+            Document xml = builder.parse(new File(importPath));
 
             XPath xPath = XPathFactory.newInstance().newXPath();
 

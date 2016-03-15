@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.exjobb.xmlreader;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -61,14 +54,14 @@ public class DirectoryMonitor implements Runnable {
             Logger.getLogger(DirectoryMonitor.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String fileSystemPath = prop.getProperty("systempath");
+        String importPath = prop.getProperty("importpath");
 
-        checkExsistingFiles(fileSystemPath);
+        checkExsistingFiles(importPath);
 
         try {
             WatchService watcher = FileSystems.getDefault().newWatchService();
             Thread runningThread = Thread.currentThread();
-            Path path = Paths.get(fileSystemPath);
+            Path path = Paths.get(importPath);
             WatchKey watchKey = path.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
 
             System.out.println("Watch service is watching: " + path.toString());
@@ -109,15 +102,15 @@ public class DirectoryMonitor implements Runnable {
         }
     }
 
-    private void checkExsistingFiles(String path) {
-        File dir = new File(path);
+    private void checkExsistingFiles(String importPath) {
+        File dir = new File(importPath);
         String[] fileList = dir.list();
         Arrays.sort(fileList);
         if (fileList.length > 0) {
             for (String file : fileList) {
                 // Process each file.
-                System.out.println("FileList: " + path + file);
-                File xml = new File(path + file);
+                System.out.println("FileList: " + importPath + file);
+                File xml = new File(importPath + file);
                 if (getExtension(xml.getAbsolutePath()).equals("xml")) {
                     System.out.println("Existing file is xml");
                     xi.xmlAction(xml.getAbsolutePath());
@@ -127,8 +120,8 @@ public class DirectoryMonitor implements Runnable {
         }
     }
 
-    private String getExtension(String filePath) {
-        File file = new File(filePath);
+    private String getExtension(String importPath) {
+        File file = new File(importPath);
         String fileName = file.getName();
         if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
             return fileName.substring(fileName.lastIndexOf(".") + 1);
