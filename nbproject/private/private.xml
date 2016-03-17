@@ -11,13 +11,17 @@
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/models/Item.java</file>
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/beans/CategoryBean.java</file>
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/ejbs/CategoryManager.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/xmlreader/XMLProductReader.java</file>
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/beans/ItemBean.java</file>
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/beans/ProductBean.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/xmlreader/XMLDirectoryListener.java</file>
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/web/WEB-INF/classes/config.properties</file>
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/ejbs/ProductManager.java</file>
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/ejbs/ItemManager.java</file>
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/xmlreader/XMLImporter.java</file>
             <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/models/Product.java</file>
+            <file>file:/C:/Users/Filip/Documents/NetBeansProjects/Exjobb%20-%20Java/src/java/com/exjobb/xmlreader/XMLItemReader.java</file>
         </group>
     </open-files>
 </project-private>

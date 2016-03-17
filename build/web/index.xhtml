@@ -52,7 +52,9 @@
                             <h:outputText value="#{item.description}" />
                         </p:column>
                         <p:column headerText="image" >
-                            <h:outputText value="todo" />
+                            <p:graphicImage cache="false" value="#{itemBean.image}" width="100px" height="100px">
+                                <f:param name="itemImage" value="#{item.number}"/>
+                            </p:graphicImage>
                         </p:column>
                     </p:dataTable>
                 </h:form>
