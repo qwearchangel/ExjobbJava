@@ -62,6 +62,6 @@ public class ItemManager implements Serializable {
         if (product == null) {
             return null;
         }
-        return (product.getItemCollection());
+        return (product.getItemList());
     }
 }

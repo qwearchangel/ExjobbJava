@@ -163,7 +163,7 @@ public class XMLImporter {
             if (product == null) {
                 Logger.getLogger(XMLImporter.class.getName()).log(Level.SEVERE, null, "There is no product for this item!");
             }
-            item.setProductid(product);
+            item.setProduct(product);
             ejb.item().add(item);
             return;
         }
@@ -197,7 +197,7 @@ public class XMLImporter {
             if (product == null) {
                 Logger.getLogger(XMLImporter.class.getName()).log(Level.SEVERE, null, "There is no product for this item!");
             } else {
-                update.setProductid(product);
+                update.setProduct(product);
             }
 
             ejb.item().add(update);

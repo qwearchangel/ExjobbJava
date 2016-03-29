@@ -53,8 +53,8 @@ public class Product implements Serializable {
     @Size(max = 255)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")
-    private List<Item> itemCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private List<Item> itemList;
     @JoinColumn(name = "Category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category category;
@@ -104,12 +104,12 @@ public class Product implements Serializable {
     }
 
     @XmlTransient
-    public List<Item> getItemCollection() {
-        return itemCollection;
+    public List<Item> getItemList() {
+        return itemList;
     }
 
-    public void setItemCollection(List<Item> itemCollection) {
-        this.itemCollection = itemCollection;
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 
     public Category getCategory() {
@@ -142,6 +142,6 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", number=" + number + ", description=" + description + ", itemCollection=" + itemCollection + ", category=" + category + '}';
+        return "Product{" + "id=" + id + ", name=" + name + ", number=" + number + ", description=" + description + ", itemList=" + itemList + ", category=" + category + '}';
     }
 }

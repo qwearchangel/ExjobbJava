@@ -45,7 +45,7 @@ public class Category implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private List<Product> productCollection;
+    private List<Product> productList;
 
     public Category() {
     }
@@ -53,16 +53,15 @@ public class Category implements Serializable {
     public Category(Integer id) {
         this.id = id;
     }
+    
+    public Category(String name) {
+        this.name = name;
+    }
 
     public Category(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
-
-    public Category(String name) {
-        this.name = name;
-    }
-    
 
     public Integer getId() {
         return id;
@@ -81,12 +80,12 @@ public class Category implements Serializable {
     }
 
     @XmlTransient
-    public List<Product> getProductCollection() {
-        return productCollection;
+    public List<Product> getProductList() {
+        return productList;
     }
 
-    public void setProductCollection(List<Product> productCollection) {
-        this.productCollection = productCollection;
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     @Override
@@ -111,7 +110,6 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "com.exjobb.entities.models.Category[ id=" + id + " ]";
+        return "Category{" + "id=" + id + ", name=" + name + ", productList=" + productList + '}';
     }
-    
 }

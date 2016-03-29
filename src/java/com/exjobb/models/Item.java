@@ -30,7 +30,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Item.findByColor", query = "SELECT i FROM Item i WHERE i.color = :color"),
     @NamedQuery(name = "Item.findBySize", query = "SELECT i FROM Item i WHERE i.size = :size"),
     @NamedQuery(name = "Item.findByFeetsize", query = "SELECT i FROM Item i WHERE i.feetsize = :feetsize"),
-    @NamedQuery(name = "Item.findByImagepath", query = "SELECT i FROM Item i WHERE i.imagepath = :imagepath"),
     @NamedQuery(name = "Item.findByName", query = "SELECT i FROM Item i WHERE i.name = :name"),
     @NamedQuery(name = "Item.findByNumber", query = "SELECT i FROM Item i WHERE i.number = :number"),
     @NamedQuery(name = "Item.findByDescription", query = "SELECT i FROM Item i WHERE i.description = :description")})
@@ -51,9 +50,6 @@ public class Item implements Serializable {
     @Size(max = 45)
     @Column(name = "feetsize")
     private String feetsize;
-    @Size(max = 255)
-    @Column(name = "imagepath")
-    private String imagepath;
     @Size(max = 45)
     @Column(name = "name")
     private String name;
@@ -64,7 +60,7 @@ public class Item implements Serializable {
     private String description;
     @JoinColumn(name = "Product_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Product productid;
+    private Product product;
 
     public Item() {
     }
@@ -105,14 +101,6 @@ public class Item implements Serializable {
         this.feetsize = feetsize;
     }
 
-    public String getImagepath() {
-        return imagepath;
-    }
-
-    public void setImagepath(String imagepath) {
-        this.imagepath = imagepath;
-    }
-
     public String getName() {
         return name;
     }
@@ -137,12 +125,12 @@ public class Item implements Serializable {
         this.description = description;
     }
 
-    public Product getProductid() {
-        return productid;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductid(Product productid) {
-        this.productid = productid;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -167,7 +155,6 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "com.exjobb.entities.models.Item[ id=" + id + " ]";
+        return "Item{" + "id=" + id + ", color=" + color + ", size=" + size + ", feetsize=" + feetsize + ", name=" + name + ", number=" + number + ", description=" + description + ", product=" + product + '}';
     }
-    
 }

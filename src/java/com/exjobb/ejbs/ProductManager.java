@@ -64,6 +64,6 @@ public class ProductManager implements Serializable {
         if (category == null) {
             return null;
         }
-        return category.getProductCollection();
+        return category.getProductList();
     }
 }
