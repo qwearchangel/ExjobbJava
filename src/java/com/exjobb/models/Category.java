@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.exjobb.entities.models;
+package com.exjobb.models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Filip
  */
 @Entity
+@Cacheable(false)
 @Table(name = "category")
 @XmlRootElement
 @NamedQueries({
@@ -47,14 +44,18 @@ public class Category implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryid")
-    private Collection<Product> productCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    private List<Product> productList;
 
     public Category() {
     }
 
     public Category(Integer id) {
         this.id = id;
+    }
+    
+    public Category(String name) {
+        this.name = name;
     }
 
     public Category(Integer id, String name) {
@@ -79,12 +80,12 @@ public class Category implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Product> getProductCollection() {
-        return productCollection;
+    public List<Product> getProductList() {
+        return productList;
     }
 
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     @Override
@@ -109,7 +110,6 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "com.exjobb.entities.models.Category[ id=" + id + " ]";
+        return "Category{" + "id=" + id + ", name=" + name + ", productList=" + productList + '}';
     }
-    
 }

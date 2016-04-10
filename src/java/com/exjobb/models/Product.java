@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.exjobb.entities.models;
+package com.exjobb.models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,12 +26,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Filip
  */
 @Entity
+@Cacheable(false)
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
-    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name")})
+    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
+    @NamedQuery(name = "Product.findByNumber", query = "SELECT p FROM Product p WHERE p.number = :number"),
+    @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,11 +48,16 @@ public class Product implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")
-    private Collection<Item> itemCollection;
+    @Column(name = "number")
+    private Integer number;
+    @Size(max = 255)
+    @Column(name = "description")
+    private String description;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private List<Item> itemList;
     @JoinColumn(name = "Category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Category categoryid;
+    private Category category;
 
     public Product() {
     }
@@ -83,21 +87,37 @@ public class Product implements Serializable {
         this.name = name;
     }
 
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @XmlTransient
-    public Collection<Item> getItemCollection() {
-        return itemCollection;
+    public List<Item> getItemList() {
+        return itemList;
     }
 
-    public void setItemCollection(Collection<Item> itemCollection) {
-        this.itemCollection = itemCollection;
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 
-    public Category getCategoryid() {
-        return categoryid;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryid(Category categoryid) {
-        this.categoryid = categoryid;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -122,7 +142,6 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.exjobb.entities.models.Product[ id=" + id + " ]";
+        return "Product{" + "id=" + id + ", name=" + name + ", number=" + number + ", description=" + description + ", itemList=" + itemList + ", category=" + category + '}';
     }
-    
 }

@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.exjobb.entities.models;
+package com.exjobb.models;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Filip
  */
 @Entity
+@Cacheable(false)
 @Table(name = "item")
 @XmlRootElement
 @NamedQueries({
@@ -33,7 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Item.findByColor", query = "SELECT i FROM Item i WHERE i.color = :color"),
     @NamedQuery(name = "Item.findBySize", query = "SELECT i FROM Item i WHERE i.size = :size"),
     @NamedQuery(name = "Item.findByFeetsize", query = "SELECT i FROM Item i WHERE i.feetsize = :feetsize"),
-    @NamedQuery(name = "Item.findByImagepath", query = "SELECT i FROM Item i WHERE i.imagepath = :imagepath")})
+    @NamedQuery(name = "Item.findByName", query = "SELECT i FROM Item i WHERE i.name = :name"),
+    @NamedQuery(name = "Item.findByNumber", query = "SELECT i FROM Item i WHERE i.number = :number"),
+    @NamedQuery(name = "Item.findByDescription", query = "SELECT i FROM Item i WHERE i.description = :description")})
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,12 +50,17 @@ public class Item implements Serializable {
     @Size(max = 45)
     @Column(name = "feetsize")
     private String feetsize;
+    @Size(max = 45)
+    @Column(name = "name")
+    private String name;
+    @Column(name = "number")
+    private Integer number;
     @Size(max = 255)
-    @Column(name = "imagepath")
-    private String imagepath;
+    @Column(name = "description")
+    private String description;
     @JoinColumn(name = "Product_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Product productid;
+    private Product product;
 
     public Item() {
     }
@@ -97,20 +101,36 @@ public class Item implements Serializable {
         this.feetsize = feetsize;
     }
 
-    public String getImagepath() {
-        return imagepath;
+    public String getName() {
+        return name;
     }
 
-    public void setImagepath(String imagepath) {
-        this.imagepath = imagepath;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Product getProductid() {
-        return productid;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setProductid(Product productid) {
-        this.productid = productid;
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -135,7 +155,6 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "com.exjobb.entities.models.Item[ id=" + id + " ]";
+        return "Item{" + "id=" + id + ", color=" + color + ", size=" + size + ", feetsize=" + feetsize + ", name=" + name + ", number=" + number + ", description=" + description + ", product=" + product + '}';
     }
-    
 }
