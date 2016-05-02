@@ -86,7 +86,7 @@ public class XMLImporter {
 
     private void AddOrDeleteProduct(XPath xPath, Document xml) {
         String operation = getOperation(xPath, xml);
-        int productNumber = XMLProductReader.getProductNumber(xPath, xml);
+        String productNumber = XMLProductReader.getProductNumber(xPath, xml);
 
         if (operation.equals(Operation.Delete)) {
             ejb.product().remove(ejb.product().getProductByNumber(productNumber));
@@ -95,8 +95,6 @@ public class XMLImporter {
 
         if (operation.equals(Operation.Link)) {
             Product product = new Product();
-            product.setName(XMLProductReader.getProductName(xPath, xml));
-            product.setDescription(XMLProductReader.getProductDescription(xPath, xml));
             product.setName(XMLProductReader.getProductName(xPath, xml));
             product.setDescription(XMLProductReader.getProductDescription(xPath, xml));
             product.setNumber(productNumber);
@@ -142,7 +140,7 @@ public class XMLImporter {
 
     private void AddOrDeleteItem(XPath xPath, Document xml) {
         String operation = getOperation(xPath, xml);
-        int itemNumber = XMLItemReader.getItemNumber(xPath, xml);
+        String itemNumber = XMLItemReader.getItemNumber(xPath, xml);
 
         if (operation.equals(Operation.Delete)) {
             ejb.item().remove(ejb.item().getByNumber(itemNumber));
@@ -204,11 +202,11 @@ public class XMLImporter {
         }
     }
 
-    private int removeLastTwo(int number) {
-        String str = Integer.toString(number);
+    private String removeLastTwo(String number) {
+        String str = number;
         if (str != null && str.length() > 0) {
             str = str.substring(0, str.length() - 2);
         }
-        return Integer.parseInt(str);
+        return str;
     }
 }

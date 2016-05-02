@@ -42,7 +42,7 @@ public class ItemManager implements Serializable {
         return em.find(Item.class, id);
     }
 
-    public Item getByNumber(int number) {
+    public Item getByNumber(String number) {
         return em.createNamedQuery("Item.findByNumber", Item.class).setParameter("number", number).getSingleResult();
     }
 
@@ -58,7 +58,7 @@ public class ItemManager implements Serializable {
         if (brandNumber.isEmpty()) {
             return null;
         }
-        Product product = pm.getProductByNumber(Integer.parseInt(brandNumber));
+        Product product = pm.getProductByNumber(brandNumber);
         if (product == null) {
             return null;
         }

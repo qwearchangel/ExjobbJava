@@ -29,7 +29,7 @@ public class ProductManager implements Serializable {
         return em.createNamedQuery("Product.findAll", Product.class).getResultList();
     }
     
-    public Product getProductByNumber(int number) {
+    public Product getProductByNumber(String number) {
         List<Product> list = em.createNamedQuery("Product.findByNumber", Product.class).setParameter("number", number).getResultList();
         if (list.isEmpty()) {
             return null;

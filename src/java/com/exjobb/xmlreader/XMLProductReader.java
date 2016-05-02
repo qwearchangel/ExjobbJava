@@ -13,19 +13,19 @@ import org.w3c.dom.NodeList;
  */
 public class XMLProductReader {
 
-    public static int getProductNumber(XPath xPath, Document xml) {
+    public static String getProductNumber(XPath xPath, Document xml) {
         String expression = "Data/Fields/ProductId";
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
             if (list.getLength() == 0) {
-                return 0;
+                return null;
             }
             result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
             e.printStackTrace();
         }
-        return Integer.parseInt(result);
+        return result;
     }
     
     public static String getProductName(XPath xPath, Document xml) {

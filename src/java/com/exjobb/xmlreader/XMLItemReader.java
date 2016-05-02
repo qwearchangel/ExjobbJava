@@ -13,19 +13,19 @@ import org.w3c.dom.NodeList;
  */
 public class XMLItemReader {
     
-    public static int getItemNumber(XPath xPath, Document xml) {
+    public static String getItemNumber(XPath xPath, Document xml) {
         String expression = "Data/Fields/ItemId";
         String result = "";
         try {
             NodeList list = (NodeList) xPath.compile(expression).evaluate(xml, XPathConstants.NODESET);
             if (list.getLength() == 0) {
-                return 0;
+                return null;
             }
             result = list.item(0).getTextContent();
         } catch (XPathExpressionException | DOMException e) {
             e.printStackTrace();
         }
-        return Integer.parseInt(result);
+        return result;
     }
     
     public static String getItemName(XPath xPath, Document xml) {

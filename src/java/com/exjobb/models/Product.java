@@ -37,6 +37,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description")})
 public class Product implements Serializable {
 
+    @Size(max = 20)
+    @Column(name = "number")
+    private String number;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,8 +52,6 @@ public class Product implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @Column(name = "number")
-    private Integer number;
     @Size(max = 255)
     @Column(name = "description")
     private String description;
@@ -87,13 +89,6 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
 
     public String getDescription() {
         return description;
@@ -143,5 +138,13 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "Product{" + "id=" + id + ", name=" + name + ", number=" + number + ", description=" + description + ", itemList=" + itemList + ", category=" + category + '}';
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

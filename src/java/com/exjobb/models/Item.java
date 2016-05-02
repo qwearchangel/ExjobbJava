@@ -35,6 +35,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Item.findByDescription", query = "SELECT i FROM Item i WHERE i.description = :description")})
 public class Item implements Serializable {
 
+    @Size(max = 20)
+    @Column(name = "number")
+    private String number;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,8 +57,6 @@ public class Item implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
-    @Column(name = "number")
-    private Integer number;
     @Size(max = 255)
     @Column(name = "description")
     private String description;
@@ -109,13 +111,6 @@ public class Item implements Serializable {
         this.name = name;
     }
 
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
 
     public String getDescription() {
         return description;
@@ -156,5 +151,13 @@ public class Item implements Serializable {
     @Override
     public String toString() {
         return "Item{" + "id=" + id + ", color=" + color + ", size=" + size + ", feetsize=" + feetsize + ", name=" + name + ", number=" + number + ", description=" + description + ", product=" + product + '}';
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }
